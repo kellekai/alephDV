@@ -1,0 +1,442 @@
+alphaV	4.88(65) 
+betaV	0.09(13)
+gammaV	1.9(6.6)e-4
+deltaV	4.17(17)
+rhoV	9.5(4.0)
+sigmaV	3.8(1.4)
+atau	0.316(15)
+
+fitbin	39
+dof	33
+
+FCN	40.02463
+
+  MINUIT RELEASE 96.03  INITIALIZED.   DIMENSIONS 100/100  EPSMAC=  0.89E-15
+
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 'alphaV    '    1.8869      0.10000         no limits
+     2 'betaV     '    2.1181      0.10000         no limits
+     3 'gammaV    '   0.33040      0.10000         no limits
+     4 'deltaV    '    3.8642      0.10000         no limits
+     5 'rhoV      '    1.0000      0.10000         no limits
+     6 'sigmaV    '    1.0000      0.10000         no limits
+     7 'atau      '   0.35388      0.10000         no limits
+ **********
+ **    1 **SET STRATEGY   2.000    
+ **********
+
+ NOW USING STRATEGY  2: MAKE SURE MINIMUM TRUE, ERRORS CORRECT  
+
+ **********
+ **    2 **SET PRINTOUT   2.000    
+ **********
+ **********
+ **    3 **HESSE
+ **********
+
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+   START COVARIANCE MATRIX CALCULATION.
+ EIGENVALUES OF SECOND-DERIVATIVE MATRIX:
+        -0.2016E-01  0.1700E-01  0.2174E-01  0.2009E+00  0.5345E+00  0.2388E+01
+         0.3858E+01
+ MINUIT WARNING IN HESSE   
+ ============== MATRIX FORCED POS-DEF BY ADDING  0.24015E-01 TO DIAGONAL.
+
+ FCN=   54.89660     FROM HESSE     STATUS=NOT POSDEF    80 CALLS       81 TOTAL
+                     EDM=  0.26E+00    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE     INTERNAL      INTERNAL  
+  NO.   NAME        VALUE          ERROR       STEP SIZE       VALUE   
+   1    alphaV      1.8869       0.13445       0.36409E-02    1.8869    
+   2    betaV       2.1181       0.77967E-01   0.21607E-02    2.1181    
+   3    gammaV     0.33040       0.58542E-01   0.18298E-02   0.33040    
+   4    deltaV      3.8642       0.23369       0.23671E-02    3.8642    
+   5    rhoV        1.0000       0.49250       0.87478E-02    1.0000    
+   6    sigmaV      1.0000       0.69748E-01   0.11503E-02    1.0000    
+   7    atau       0.35388       0.15133E-01   0.10000E-02   0.35388    
+
+ EXTERNAL ERROR MATRIX.    NDIM= 100    NPAR=  7    ERR DEF=  1.00    
+  0.181E-01-0.954E-02 0.498E-03 0.192E-01-0.359E-01-0.523E-02 0.117E-02
+ -0.954E-02 0.608E-02-0.365E-03-0.814E-02 0.167E-01 0.191E-02-0.484E-03
+  0.498E-03-0.365E-03 0.343E-02-0.194E-02-0.815E-02-0.654E-03 0.613E-04
+  0.192E-01-0.814E-02-0.194E-02 0.546E-01-0.102E+00-0.151E-01 0.335E-02
+ -0.359E-01 0.167E-01-0.815E-02-0.102E+00 0.243E+00 0.318E-01-0.703E-02
+ -0.523E-02 0.191E-02-0.654E-03-0.151E-01 0.318E-01 0.486E-02-0.961E-03
+  0.117E-02-0.484E-03 0.613E-04 0.335E-02-0.703E-02-0.961E-03 0.229E-03
+ ERR MATRIX NOT POS-DEF
+
+ PARAMETER  CORRELATION COEFFICIENTS
+       NO.  GLOBAL     1     2     3     4     5     6     7
+        1  0.97341  1.000-0.910 0.063 0.611-0.542-0.557 0.574
+        2  0.97217 -0.910 1.000-0.080-0.447 0.434 0.351-0.410
+        3  0.96438  0.063-0.080 1.000-0.142-0.283-0.160 0.069
+        4  0.99632  0.611-0.447-0.142 1.000-0.885-0.925 0.946
+        5  0.98862 -0.542 0.434-0.283-0.885 1.000 0.925-0.944
+        6  0.99025 -0.557 0.351-0.160-0.925 0.925 1.000-0.911
+        7  0.98616  0.574-0.410 0.069 0.946-0.944-0.911 1.000
+ ERR MATRIX NOT POS-DEF
+ **********
+ **    4 **MIGRAD  0.1000E+05  0.1000    
+ **********
+ START MIGRAD MINIMIZATION.  STRATEGY 2.  CONVERGENCE WHEN EDM .LT. 0.10E-03
+   START COVARIANCE MATRIX CALCULATION.
+ EIGENVALUES OF SECOND-DERIVATIVE MATRIX:
+         0.1464E-04  0.7770E-04  0.1524E-01  0.5983E-01  0.5496E+00  0.2455E+01
+         0.3920E+01
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+
+ FCN=   54.89660     FROM HESSE     STATUS=OK            50 CALLS      131 TOTAL
+                     EDM=  0.34E+01    STRATEGY= 2      ERROR MATRIX ACCURATE 
+
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      1.8869        2.5791       0.16091E-04   0.15482E-01
+   2    betaV       2.1181        2.7157       0.95426E-05   0.32907E-01
+   3    gammaV     0.33040        2.1249       0.80897E-05  -0.20157    
+   4    deltaV      3.8642        3.0814       0.10461E-04  -0.12132    
+   5    rhoV        1.0000        3.6431       0.38707E-04  -0.83559    
+   6    sigmaV      1.0000       0.90617       0.50763E-05   -4.9601    
+   7    atau       0.35388       0.53604E-01   0.13107E-05   0.23541    
+
+ PARAMETER  CORRELATION COEFFICIENTS
+       NO.  GLOBAL     1     2     3     4     5     6     7
+        1  0.99993  1.000-0.981 0.466-0.660-0.368 0.973-0.870
+        2  0.99998 -0.981 1.000-0.627 0.792 0.539-0.998 0.940
+        3  0.99997  0.466-0.627 1.000-0.971-0.991 0.648-0.802
+        4  0.99998 -0.660 0.792-0.971 1.000 0.934-0.810 0.919
+        5  0.99979 -0.368 0.539-0.991 0.934 1.000-0.561 0.720
+        6  0.99994  0.973-0.998 0.648-0.810-0.561 1.000-0.951
+        7  0.99888 -0.870 0.940-0.802 0.919 0.720-0.951 1.000
+
+ FCN=   54.87960     FROM MIGRAD    STATUS=PROGRESS      81 CALLS      162 TOTAL
+                     EDM=  0.31E+01    STRATEGY= 2      ERROR MATRIX ACCURATE 
+
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      1.8975        2.5791       0.10525E-01  -0.90273    
+   2    betaV       2.1083        2.7157      -0.97797E-02   -1.5519    
+   3    gammaV     0.33043        2.1249       0.29224E-04  -0.84769    
+   4    deltaV      3.8607        3.0814      -0.34562E-02  -0.91632    
+   5    rhoV        1.0018        3.6431       0.18481E-02  -0.58784    
+   6    sigmaV      1.0032       0.90617       0.31995E-02   -7.1231    
+   7    atau       0.35373       0.53604E-01  -0.14390E-03    8.6760    
+ MIGRAD FAILS TO FIND IMPROVEMENT
+   START COVARIANCE MATRIX CALCULATION.
+ EIGENVALUES OF SECOND-DERIVATIVE MATRIX:
+        -0.5224E-04  0.1923E-02  0.1746E-01  0.7815E-01  0.5734E+00  0.2312E+01
+         0.4017E+01
+ MINUIT WARNING IN HESSE   
+ ============== MATRIX FORCED POS-DEF BY ADDING  0.40695E-02 TO DIAGONAL.
+
+ FCN=   54.87960     FROM HESSE     STATUS=NOT POSDEF    50 CALLS      223 TOTAL
+                     EDM=  0.70E-01    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      1.8975       0.23488       0.11378E-03  -0.90274    
+   2    betaV       2.1083       0.18516       0.70034E-04   -1.5519    
+   3    gammaV     0.33043       0.18179       0.59838E-04  -0.84768    
+   4    deltaV      3.8607       0.21946       0.73889E-04  -0.91631    
+   5    rhoV        1.0018       0.51252       0.29804E-03  -0.58772    
+   6    sigmaV      1.0032       0.60148E-01   0.39706E-04   -7.1224    
+   7    atau       0.35373       0.10316E-01   0.92833E-05    8.6758    
+
+ PARAMETER  CORRELATION COEFFICIENTS
+       NO.  GLOBAL     1     2     3     4     5     6     7
+        1  0.99119  1.000-0.935-0.227 0.095 0.216 0.684-0.124
+        2  0.99464 -0.935 1.000 0.001 0.118 0.055-0.798 0.037
+        3  0.99594 -0.227 0.001 1.000-0.889-0.783-0.043 0.055
+        4  0.99575  0.095 0.118-0.889 1.000 0.502-0.268 0.316
+        5  0.98728  0.216 0.055-0.783 0.502 1.000 0.094-0.606
+        6  0.98358  0.684-0.798-0.043-0.268 0.094 1.000-0.255
+        7  0.96926 -0.124 0.037 0.055 0.316-0.606-0.255 1.000
+ ERR MATRIX NOT POS-DEF
+
+ FCN=   54.84386     FROM MIGRAD    STATUS=PROGRESS     165 CALLS      246 TOTAL
+                     EDM=  0.23E-01    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      1.9101       0.23488       0.12630E-01    2.8500    
+   2    betaV       2.1011       0.18516      -0.72395E-02    3.2258    
+   3    gammaV     0.31948       0.18179      -0.10945E-01   -11.215    
+   4    deltaV      3.8657       0.21946       0.50290E-02   -9.1854    
+   5    rhoV        1.0425       0.51252       0.40674E-01   -1.2178    
+   6    sigmaV      1.0068       0.60148E-01   0.36461E-02   -8.0503    
+   7    atau       0.35312       0.10316E-01  -0.60830E-03    22.755    
+
+ FCN=   53.21421     FROM MIGRAD    STATUS=PROGRESS     357 CALLS      438 TOTAL
+                     EDM=  0.83E+00    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      2.5561       0.31788       0.83398E-01   -4.4918    
+   2    betaV       1.5508       0.26842      -0.84774E-01   -18.064    
+   3    gammaV     0.92155E-01   0.46794E-01  -0.16298E-01   -8.9132    
+   4    deltaV      4.0984       0.61770E-01   0.34638E-02   -30.565    
+   5    rhoV        2.3051       0.70636       0.28186        1.9371    
+   6    sigmaV      1.2007       0.10159       0.42318E-01   -31.850    
+   7    atau       0.34539       0.10255E-01  -0.33413E-02    119.86    
+
+ FCN=   50.47126     FROM MIGRAD    STATUS=PROGRESS     543 CALLS      624 TOTAL
+                     EDM=  0.51E+00    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      2.9933       0.24715       0.18486E-01   0.35192    
+   2    betaV       1.2005       0.16660      -0.68512E-02   -5.0531    
+   3    gammaV     0.27174E-01   0.17604E-01   0.12161E-02    48.209    
+   4    deltaV      4.2254       0.57011E-01  -0.31270E-02   -2.7693    
+   5    rhoV        3.3813       0.49402       0.94614E-01  -0.64343E-01
+   6    sigmaV      1.3977       0.85168E-01   0.19623E-02   -11.492    
+   7    atau       0.34994       0.69600E-02  -0.12512E-02    63.133    
+
+ FCN=   48.18205     FROM MIGRAD    STATUS=PROGRESS     752 CALLS      833 TOTAL
+                     EDM=  0.39E+00    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      3.3644       0.20732       0.32861E-01    29.449    
+   2    betaV      0.93835       0.11652      -0.17997E-01    79.262    
+   3    gammaV     0.57798E-02   0.53738E-02  -0.59255E-03   -1554.0    
+   4    deltaV      4.2295       0.29341E-01   0.27163E-02    16.502    
+   5    rhoV        5.3424       0.88034       0.88945E-01   -10.562    
+   6    sigmaV      1.5802       0.70474E-01   0.87478E-02    39.856    
+   7    atau       0.33284       0.99791E-02  -0.28484E-03   -279.06    
+
+ FCN=   45.17362     FROM MIGRAD    STATUS=PROGRESS     936 CALLS     1017 TOTAL
+                     EDM=  0.22E+00    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      3.6439       0.12743      -0.64670E-02   -4.2260    
+   2    betaV      0.68142       0.94940E-01  -0.30099E-01    6.2388    
+   3    gammaV     0.15270E-02   0.10889E-02  -0.37751E-03   -3000.0    
+   4    deltaV      4.2621       0.31119E-01   0.52164E-02   -10.391    
+   5    rhoV        6.6343       0.45100       0.24089       -4.7205    
+   6    sigmaV      1.9131       0.14249       0.81147E-01    3.8771    
+   7    atau       0.33880       0.64900E-02   0.13798E-02   -69.900    
+ MIGRAD FAILS TO FIND IMPROVEMENT
+   START COVARIANCE MATRIX CALCULATION.
+ EIGENVALUES OF SECOND-DERIVATIVE MATRIX:
+        -0.1199E-01  0.1709E-02  0.2003E-01  0.3842E-01  0.4373E+00  0.8386E+00
+         0.5676E+01
+ MINUIT WARNING IN HESSE   
+ ============== MATRIX FORCED POS-DEF BY ADDING  0.17671E-01 TO DIAGONAL.
+
+ FCN=   43.59683     FROM HESSE     STATUS=NOT POSDEF    50 CALLS     1216 TOTAL
+                     EDM=  0.16E+00    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      3.8694       0.10001       0.77074E-04   -25.534    
+   2    betaV      0.55075       0.35420E-01   0.19614E-04   -87.349    
+   3    gammaV     0.65193E-03   0.57539E-03   0.19215E-06    9164.9    
+   4    deltaV      4.2587       0.33859E-01   0.62195E-04   -21.831    
+   5    rhoV        7.6883       0.86051       0.32948E-03    5.2912    
+   6    sigmaV      2.0905       0.83705E-01   0.60884E-04   -32.487    
+   7    atau       0.33468       0.11957E-01   0.96000E-05    197.24    
+
+ PARAMETER  CORRELATION COEFFICIENTS
+       NO.  GLOBAL     1     2     3     4     5     6     7
+        1  0.97522  1.000-0.591-0.064-0.211 0.069-0.191-0.070
+        2  0.98573 -0.591 1.000-0.009 0.045 0.006-0.614 0.088
+        3  0.99483 -0.064-0.009 1.000-0.372-0.946 0.067-0.374
+        4  0.84073 -0.211 0.045-0.372 1.000 0.177 0.117 0.765
+        5  0.99415  0.069 0.006-0.946 0.177 1.000-0.026 0.115
+        6  0.97933 -0.191-0.614 0.067 0.117-0.026 1.000 0.030
+        7  0.96434 -0.070 0.088-0.374 0.765 0.115 0.030 1.000
+ ERR MATRIX NOT POS-DEF
+
+ FCN=   43.40256     FROM MIGRAD    STATUS=PROGRESS    1155 CALLS     1236 TOTAL
+                     EDM=  0.53E-01    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      3.8802       0.10001       0.10785E-01    5.9656    
+   2    betaV      0.54699       0.35420E-01  -0.37588E-02    31.402    
+   3    gammaV     0.55736E-03   0.57539E-03  -0.94572E-04   -4488.3    
+   4    deltaV      4.2589       0.33859E-01   0.19143E-03    2.0242    
+   5    rhoV        7.8480       0.86051       0.15966       -2.8323    
+   6    sigmaV      2.0946       0.83705E-01   0.40700E-02    9.1235    
+   7    atau       0.33378       0.11957E-01  -0.90818E-03   -45.661    
+
+ FCN=   41.71382     FROM MIGRAD    STATUS=PROGRESS    1344 CALLS     1425 TOTAL
+                     EDM=  0.18E+00    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      4.1657       0.16299      -0.16855E-01  -0.59347    
+   2    betaV      0.37770       0.80700E-01   0.11236E-01    17.183    
+   3    gammaV     0.20065E-03   0.12213E-03   0.21688E-04   -9291.2    
+   4    deltaV      4.2422       0.36233E-01   0.20692E-02   -19.636    
+   5    rhoV        9.1322       0.69819      -0.68379E-01   -1.9386    
+   6    sigmaV      2.4399       0.20957      -0.22379E-01    4.1237    
+   7    atau       0.32544       0.16816E-01   0.47591E-03   -11.896    
+
+ FCN=   40.56478     FROM MIGRAD    STATUS=PROGRESS    1538 CALLS     1619 TOTAL
+                     EDM=  0.15E+00    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      4.4693       0.25492       0.31787E-01   0.88742    
+   2    betaV      0.23590       0.95219E-01  -0.12761E-01    18.294    
+   3    gammaV     0.51042E-04   0.74427E-04  -0.86194E-05   -43663.    
+   4    deltaV      4.2275       0.44452E-01  -0.56918E-02   -5.2312    
+   5    rhoV        10.740        1.3480       0.19592       -2.0203    
+   6    sigmaV      2.8777       0.33798       0.45099E-01    2.6095    
+   7    atau       0.32035       0.17973E-01  -0.17503E-02   -41.559    
+
+ FCN=   40.38854     FROM MIGRAD    STATUS=PROGRESS    1718 CALLS     1799 TOTAL
+                     EDM=  0.90E-03    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      4.5939       0.20560       0.63719E-02  -0.69719    
+   2    betaV      0.18793       0.75497E-01  -0.25744E-02  -0.28676    
+   3    gammaV     0.25101E-04   0.34728E-04  -0.11912E-05   -4129.7    
+   4    deltaV      4.2174       0.31910E-01  -0.11814E-02  -0.55916    
+   5    rhoV        11.598        1.5029       0.55825E-01   0.52262E-01
+   6    sigmaV      3.1012       0.40917       0.14254E-01  -0.31048    
+   7    atau       0.31943       0.15480E-01  -0.16492E-03    1.8791    
+
+ FCN=   40.31644     FROM MIGRAD    STATUS=PROGRESS    1890 CALLS     1971 TOTAL
+                     EDM=  0.50E-03    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      4.6559       0.22950       0.48379E-03   -5.8638    
+   2    betaV      0.16690       0.57704E-01  -0.11347E-03   -47.781    
+   3    gammaV     0.30718E-04   0.37333E-04   0.18537E-06   -726.73    
+   4    deltaV      4.2084       0.58899E-01  -0.12714E-03   -1.5939    
+   5    rhoV        11.389        1.6790      -0.78757E-02   0.11501    
+   6    sigmaV      3.2083       0.30000       0.27127E-03   -5.7480    
+   7    atau       0.31819       0.16469E-01  -0.47482E-04    4.9581    
+
+ FCN=   40.16799     FROM MIGRAD    STATUS=PROGRESS    2064 CALLS     2145 TOTAL
+                     EDM=  0.22E-01    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      4.6909       0.23745      -0.68378E-02   -1.8215    
+   2    betaV      0.15019       0.65548E-01   0.19824E-02   -15.976    
+   3    gammaV     0.63548E-04   0.61518E-04   0.57403E-06    1952.2    
+   4    deltaV      4.2065       0.57852E-01   0.11250E-02  -0.91637    
+   5    rhoV        10.596        1.2402       0.16599E-01   0.18803    
+   6    sigmaV      3.3338       0.40415      -0.65502E-02   -1.9978    
+   7    atau       0.31916       0.15642E-01   0.24494E-03    11.890    
+
+ FCN=   40.03774     FROM MIGRAD    STATUS=PROGRESS    2239 CALLS     2320 TOTAL
+                     EDM=  0.10E-01    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      4.8284       0.37674       0.10479E-01  -0.89192    
+   2    betaV      0.10595       0.95362E-01  -0.32114E-02   -15.918    
+   3    gammaV     0.14488E-03   0.21425E-03   0.75642E-05   -2292.2    
+   4    deltaV      4.1830       0.83530E-01  -0.21139E-02   0.79763    
+   5    rhoV        9.7434        1.8798      -0.54893E-01  -0.26894    
+   6    sigmaV      3.6958       0.82784       0.30237E-01   -1.2907    
+   7    atau       0.31700       0.14328E-01  -0.27433E-03   -4.4194    
+
+ MIGRAD MINIMIZATION HAS CONVERGED.
+
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+   START COVARIANCE MATRIX CALCULATION.
+ EIGENVALUES OF SECOND-DERIVATIVE MATRIX:
+         0.2114E-03  0.5138E-03  0.1045E-01  0.6002E-01  0.3708E+00  0.8894E+00
+         0.5669E+01
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ MIGRAD TERMINATED WITHOUT CONVERGENCE.
+
+ FCN=   40.02463     FROM MIGRAD    STATUS=FAILED      2437 CALLS     2518 TOTAL
+                     EDM=  0.13E-02    STRATEGY= 2      ERR MATRIX APPROXIMATE
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1    alphaV      4.8791       0.47634       0.53934E-04  -0.11044    
+   2    betaV      0.92697E-01   0.96187E-01   0.56274E-05  -0.96459    
+   3    gammaV     0.18542E-03   0.64337E-03   0.64114E-07   -36.615    
+   4    deltaV      4.1711       0.13374       0.54816E-04  -0.15429    
+   5    rhoV        9.5051        3.9063       0.38783E-03   0.66556E-02
+   6    sigmaV      3.8366        1.0200       0.94906E-04  -0.36458E-01
+   7    atau       0.31625       0.14831E-01   0.12194E-04   0.37915    
+
+ EXTERNAL ERROR MATRIX.    NDIM= 100    NPAR=  7    ERR DEF=  1.00    
+  0.227E+00-0.430E-01-0.138E-04-0.616E-01 0.172E+00 0.417E+00-0.148E-02
+ -0.430E-01 0.925E-02-0.101E-04 0.110E-01 0.422E-01-0.963E-01 0.425E-03
+ -0.138E-04-0.101E-04 0.414E-06 0.736E-05-0.250E-02 0.170E-03-0.132E-05
+ -0.616E-01 0.110E-01 0.736E-05 0.179E-01-0.725E-01-0.103E+00 0.562E-03
+  0.172E+00 0.422E-01-0.250E-02-0.725E-01 0.153E+02-0.830E+00 0.315E-02
+  0.417E+00-0.963E-01 0.170E-03-0.103E+00-0.830E+00 0.104E+01-0.472E-02
+ -0.148E-02 0.425E-03-0.132E-05 0.562E-03 0.315E-02-0.472E-02 0.220E-03
+ ERR MATRIX APPROXIMATE
+
+ PARAMETER  CORRELATION COEFFICIENTS
+       NO.  GLOBAL     1     2     3     4     5     6     7
+        1  0.99935  1.000-0.938-0.045-0.967 0.093 0.858-0.209
+        2  0.99983 -0.938 1.000-0.163 0.856 0.112-0.982 0.298
+        3  0.99948 -0.045-0.163 1.000 0.086-0.995 0.260-0.138
+        4  0.99138 -0.967 0.856 0.086 1.000-0.139-0.754 0.283
+        5  0.99950  0.093 0.112-0.995-0.139 1.000-0.208 0.054
+        6  0.99956  0.858-0.982 0.260-0.754-0.208 1.000-0.312
+        7  0.96480 -0.209 0.298-0.138 0.283 0.054-0.312 1.000
+ ERR MATRIX APPROXIMATE
+ **********
+ **    5 **HESSE
+ **********
+   START COVARIANCE MATRIX CALCULATION.
+ EIGENVALUES OF SECOND-DERIVATIVE MATRIX:
+         0.1002E-03  0.5029E-03  0.1038E-01  0.6006E-01  0.3707E+00  0.8894E+00
+         0.5669E+01
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+
+ FCN=   40.02463     FROM HESSE     STATUS=OK            50 CALLS     2568 TOTAL
+                     EDM=  0.14E-02    STRATEGY= 2      ERROR MATRIX ACCURATE 
+
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME        VALUE          ERROR       STEP SIZE       VALUE   
+   1    alphaV      4.8791       0.65896       0.10787E-04    4.8791    
+   2    betaV      0.92697E-01   0.13957       0.11255E-05   0.92697E-01
+   3    gammaV     0.18542E-03   0.66853E-03   0.12823E-07   0.18542E-03
+   4    deltaV      4.1711       0.17645       0.10963E-04    4.1711    
+   5    rhoV        9.5051        4.0118       0.77567E-04    9.5051    
+   6    sigmaV      3.8366        1.4790       0.18981E-04    3.8366    
+   7    atau       0.31625       0.15614E-01   0.24389E-05   0.31625    
+
+ EXTERNAL ERROR MATRIX.    NDIM= 100    NPAR=  7    ERR DEF=  1.00    
+  0.434E+00-0.890E-01 0.550E-04-0.114E+00-0.149E+00 0.903E+00-0.368E-02
+ -0.890E-01 0.195E-01-0.258E-04 0.226E-01 0.116E+00-0.205E+00 0.918E-03
+  0.550E-04-0.258E-04 0.447E-06-0.999E-05-0.266E-02 0.338E-03-0.218E-05
+ -0.114E+00 0.226E-01-0.999E-05 0.311E-01 0.835E-02-0.226E+00 0.112E-02
+ -0.149E+00 0.116E+00-0.266E-02 0.835E-02 0.161E+02-0.162E+01 0.731E-02
+  0.903E+00-0.205E+00 0.338E-03-0.226E+00-0.162E+01 0.219E+01-0.995E-02
+ -0.368E-02 0.918E-03-0.218E-05 0.112E-02 0.731E-02-0.995E-02 0.244E-03
+
+ PARAMETER  CORRELATION COEFFICIENTS
+       NO.  GLOBAL     1     2     3     4     5     6     7
+        1  0.99966  1.000-0.968 0.125-0.980-0.056 0.927-0.358
+        2  0.99992 -0.968 1.000-0.276 0.919 0.207-0.991 0.421
+        3  0.99952  0.125-0.276 1.000-0.085-0.994 0.342-0.208
+        4  0.99506 -0.980 0.919-0.085 1.000 0.012-0.865 0.405
+        5  0.99952 -0.056 0.207-0.994 0.012 1.000-0.273 0.117
+        6  0.99979  0.927-0.991 0.342-0.865-0.273 1.000-0.431
+        7  0.96830 -0.358 0.421-0.208 0.405 0.117-0.431 1.000
+ alphaV       4.8791023619594007       0.65895501465237172     
+ betaV        9.2697478836602898E-002  0.13957231042858917     
+ gammaV       1.8541796203097678E-004   6.6853046954165705E-004
+ deltaV       4.1710727355399566       0.17645175129360863     
+ rhoV         9.5050902037715748        4.0117896690529911     
+ sigmaV       3.8366460157550111        1.4790340377022531     
+ atau        0.31625489510305821        1.5613622915809814E-002
+ ------------------
+ ##	fitbin =           39
+ ##	dof =           33
+ ------------------
+ **********
+ **    6 **SHOW FCNVALUE
+ **********
+
+ FCN=   40.02463     FROM HESSE     STATUS=OK            50 CALLS     2568 TOTAL
+                     EDM=  0.14E-02    STRATEGY= 2      ERROR MATRIX ACCURATE
