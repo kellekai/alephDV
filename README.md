@@ -14,8 +14,13 @@ The evaluation is described in detail in the document Masterthesis2016.pdf in th
 ## INSTALLATION
 Download or clone repository. Move to the base directory and type:
 
-  -> make all
+  *make all
 
   To remove the libraries and executives type:
 
-  -> make remove
+  *make remove
+
+## USAGE
+To execute the program just type:
+
+  *./alphaDV

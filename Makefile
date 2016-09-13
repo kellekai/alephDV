@@ -87,6 +87,8 @@ tipos.o: lib/tipos.f90
 
 clean: 
 	rm *.mod *.o
+	rm lib/quadpack/*.o
+	rm lib/minuit/*.o
 
 remove: 
 	rm ${LIBOBJ} alphaDV
