@@ -1,0 +1,34 @@
+#################################################
+#						#
+#	in this config file write the		# 
+#	parameter initial value and the		#
+#	bin for s_0				#
+#						#
+#	it is necessary to remain in the 	#
+#	order given as follow			#
+#						#
+#	----------				#
+#						#
+#	alpha=					#
+#	beta=					#
+#	gamma=					#
+#	delta=					#
+#						#
+#	bin=					#
+#						#
+#	----------				#
+#						#
+#	the parameter values and the bin, 	#
+#	have to follow an equal sign.		#
+#						#
+#	Comments are allowed and have to	# 
+#	follow the number sign			#
+#						#
+#################################################
+
+alpha = 1.0
+beta = 1.0
+gamma = 1.0
+delta = 1.0
+
+binmin = 58
