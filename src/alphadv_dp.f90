@@ -18,18 +18,16 @@ PROGRAM main
 	
 	implicit none
 	
-	integer			:: n,m  ! used in loops
+	integer			:: n,m, nbin  ! used in loops
 	
 	real (kind=dp)	:: atau, alphaV,betaV,gammaV,deltaV,rhoV,sigmaV  ! parameters
 	
-	integer			:: integ_typ,order  ! ni type, ni order
+	integer			:: integ_typ,order,state  ! ni type, ni order
 	logical			:: partial  ! ni print steps yes/no ni
 	
 	integer			:: perr	! used by minuit
 	real (kind=dp)	:: arg(10),pval(10),ierr(10),plo(10),phi(10)! used by minuit
 	character*10 name(10)
-	
-	call init()
 
 	!============STARTING MAIN CODE FROM HERE=======================================================================================
 			
@@ -46,14 +44,36 @@ PROGRAM main
 !	call MNparm(4,'rhoV',1.0d0,0.1d0,0,0,perr)
 !	call MNparm(5,'sigmaV',1.09d0,0.1d0,0,0,perr)
 !	call MNparm(6,'atau',0.29664d0,0.01d0,0,0,perr)
+
+!	call MNparm(1,'alphaV',1.4016853744698370d0,0.1d0,0.0d0,0.0d0,perr)
+!	call MNparm(2,'betaV',2.3770640126791651d0,0.1d0,0.0d0,0.0d0,perr)
+!	call MNparm(3,'gammaV',0.43564979195168169d0,0.1d0,0.0d0,0.0d0,perr)
+!	call MNparm(4,'deltaV',3.6927297853984169d0,0.1d0,0.0d0,0.0d0,perr)
+!	call MNparm(5,'rhoV',1d0,0.1d0,0.0d0,0.0d0,perr)
+!	call MNparm(6,'sigmaV',1d0,0.1d0,0.0d0,0.0d0,perr)
+!	call MNparm(7,'atau',0.34082180944017310d0,0.1d0,0.0d0,0.0d0,perr)
+
+	npar = 7
 	
-	call MNparm(1,'alphaV',1.4016853744698370d0,0.1d0,0.0d0,0.0d0,perr)
-	call MNparm(2,'betaV',2.3770640126791651d0,0.1d0,0.0d0,0.0d0,perr)
-	call MNparm(3,'gammaV',0.43564979195168169d0,0.1d0,0.0d0,0.0d0,perr)
-	call MNparm(4,'deltaV',3.6927297853984169d0,0.1d0,0.0d0,0.0d0,perr)
-	call MNparm(5,'rhoV',1d0,0.1d0,0.0d0,0.0d0,perr)
-	call MNparm(6,'sigmaV',1d0,0.1d0,0.0d0,0.0d0,perr)
-	call MNparm(7,'atau',0.34082180944017310d0,0.1d0,0.0d0,0.0d0,perr)
+	npar = npar+1
+	
+	allocate(par(npar), stat=state)
+	
+	call readConfig(par, npar)
+	
+	nbin = par(npar)
+	
+	call init(nbin)
+	
+	pval(1:npar) = par(1:npar-1)
+
+	call MNparm(1,'alphaV',pval(1),0.1d0,0.0d0,0.0d0,perr)
+	call MNparm(2,'betaV',pval(2),0.1d0,0.0d0,0.0d0,perr)
+	call MNparm(3,'gammaV',pval(3),0.1d0,0.0d0,0.0d0,perr)
+	call MNparm(4,'deltaV',pval(4),0.1d0,0.0d0,0.0d0,perr)
+	call MNparm(5,'rhoV',pval(5),0.1d0,0.0d0,0.0d0,perr)
+	call MNparm(6,'sigmaV',pval(6),0.1d0,0.0d0,0.0d0,perr)
+	call MNparm(7,'atau',pval(7),0.1d0,0.0d0,0.0d0,perr)
 
 	arg(1) = 5.0_dp
 	arg(2) = 6.0_dp
@@ -63,9 +83,9 @@ PROGRAM main
 	call mnexcm(fcn, 'SET STRategy', (/ 2._dp /), 1, perr, 0) 
 	call mnexcm(fcn,'SET PRINTout', (/2.0_dp/),1,perr,0)  ! set print level (2=full)
 	!call mnexcm(fcn, 'SET ERRordef', (/4._dp/),1,perr,0)
+	call mnexcm(fcn, 'FIX', (/ 5._dp,6._dp /), 2, perr, 0)
 	call mnexcm(fcn, 'HESse', (/ 2._dp /), 0, perr, 0)
-	call mnexcm(fcn,'MIGRAD',    (/10000.0_dp,0.1_dp/),2,perr,0)  ! perform MIGRAD minimization
-	call mnexcm(fcn, 'HESse', (/ 2._dp /), 0, perr, 0)
+	call mnexcm(fcn,'MIN',    (/10000.0_dp,0.1_dp/),2,perr,0)  ! perform MIGRAD minimization
 	!call mnexcm(fcn, 'MINOs', (/ 10000.0_dp,1._dp,2._dp,3._dp,4._dp,5._dp,6._dp,7._dp /), 6, perr, 0)
 	
 	do n=1,7
@@ -144,8 +164,8 @@ PROGRAM main
 		!betaV*cos(alphaV+betaV*s))/((betaV**2+gammaV**2)*exp(gammaV*s))
 
 		!call romberg_improper(f_DVV, sbin(bin)+dsbin(bin)/2._dp, bb, ss, 1,1.0d-10, .false.,9)
-		call dqagi(f_DVV,sbin(bin)+dsbin(bin)/2._dp,1,1.0d-18,1.0d-20,ni_DVV,fabserr,fneval, &
-		fier,9,flenw,flast,fiwork,fwork)
+		call dqagi(f_DVV,s,1,1.0d-18,1.0d-20,ni_DVV,fabserr,fneval, &
+		fier,50,flenw,flast,fiwork,fwork)
 		!write(*,*) fier, ss
 	END FUNCTION ni_DVV
 	
@@ -219,6 +239,56 @@ PROGRAM main
 		fval = Chi2FOV(xval(0),xval(1),xval(2),xval(3),xval(4),xval(5),xval(6))
 			
 	END SUBROUTINE fcn
+
+	subroutine readConfig(par, npar)
+
+		real (kind=dp), dimension(:), allocatable, intent(inout) :: par
+		integer, intent(in) :: npar
+		integer :: n, m , io, iscmt=0, length=0, i=0
+		character p
+		character*200 buffer
+		character(:), allocatable :: line
+		
+		open(553, file="config.in")
+		
+		do
+			read(553,'(A)',iostat=io) buffer
+			if (io .ne. 0) exit
+			do n=1,200
+				p=buffer(n:n)
+				if (p .eq. '#') then
+					iscmt = 1
+					exit
+				end if
+				length = length + 1
+			end do
+		
+			if (length .ge. 0) then
+				if (iscmt .eq. 1) then
+					line = trim(buffer(1:length))
+				else 
+					line = trim(buffer)
+				endif
+				length = len(line)
+				do m=1,length
+					p = line(m:m)
+					if (p .eq. '=') then
+						i = i+1
+						read(line(m+1:length),*) par(i)
+						exit
+					end if
+				end do
+			end if
+			if (i .eq. npar) exit
+			iscmt = 0
+			length=0
+		end do
+		
+		if (i .lt. npar) stop(" - [ERROR] - not enough parameter defined in config file")
+		
+		close(553)
+		
+	end subroutine
 			
 END PROGRAM main
 	

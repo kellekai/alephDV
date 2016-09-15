@@ -7,7 +7,12 @@ MODULE param
 	use lu
 	implicit none
 	
-	integer, parameter :: binmin = 44	! start fitting at...
+	!integer, parameter :: binmin = 44	! start fitting at...
+	integer :: binmin
+	real (kind = dp), dimension(:,:), allocatable :: SigInvV
+	
+	real (kind=dp), dimension(:), allocatable :: par
+	integer npar,statearr
 	
 	!
 	!	define constants
@@ -63,7 +68,7 @@ MODULE param
 	! compute covariance matrix
 	!
 	
-	real (kind = dp), dimension(binmin:78,binmin:78) :: SigInvV
+	!real (kind = dp), dimension(binmin:78,binmin:78) :: SigInvV
 	real (kind=dp), dimension(1:21,1:21) :: Test
 	
 	!
@@ -82,9 +87,11 @@ MODULE param
 	
 	CONTAINS !=========================================================
 	
-	SUBROUTINE init() ! initialize experimental data arrays and spline data
+	SUBROUTINE init(bin) ! initialize experimental data arrays and spline data
 		
-		integer :: n
+		integer :: n,statearr, bin
+	
+		binmin = bin
 	
 		open(55, file = 'data/truecovV')
 		do n = 0, 78
@@ -118,8 +125,12 @@ MODULE param
 		close(55)
 		close(56)
 		
+		allocate(SigInvV(binmin:78,binmin:78), stat=statearr)
+		
 		SigInvV(binmin:78,binmin:78) = INVM()
 		!Test=T()
+		write(*,*) "test"
+
 		
 	
 	END SUBROUTINE init
@@ -129,10 +140,14 @@ MODULE param
 	!	COMPUTES THE INVERSE COVARIANT MATRIX // noch nicht getestet, invertieralgorithmus finden.
 	!
 		integer :: i,j
-		real (kind=dp), dimension(binmin:78,binmin:78) :: M, INVM
-		real (kind=dp), dimension(1:78-binmin+1,1:78-binmin+1) :: A,B
+		real (kind=dp), dimension(:,:), allocatable :: M, INVM
+		real (kind=dp), dimension(:,:), allocatable :: A,B
 		integer :: INDX(78-binmin+1),D,CODE
 		
+		allocate(A(1:78-binmin+1,1:78-binmin+1),stat=statearr)
+		allocate(B(1:78-binmin+1,1:78-binmin+1),stat=statearr)
+		allocate(M(binmin:78,binmin:78),stat=statearr)
+		allocate(INVM(binmin:78,binmin:78),stat=statearr)
 
 		do i = binmin, 78
 			B(i+1-binmin,i+1-binmin) = 1._dp
