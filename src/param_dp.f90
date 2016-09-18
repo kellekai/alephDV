@@ -7,13 +7,18 @@ MODULE param
 	use lu
 	implicit none
 	
-	integer, parameter :: binmin = 44	! start fitting at...
+	real (kind=dp), dimension(:), allocatable :: par
+	integer npar
+	
+	integer :: binmin	! start fitting at...
+	integer :: statearr
 	
 	!
 	!	define constants
 	!
 	
 	real (kind=dp), parameter :: pi = 4.0_dp * atan(1.0_dp)
+	real (kind=dp), parameter   ::  mtau = 1.77684d0
 	
 	!
 	! J function used in IIntegralPTFO defined as array. Values from python code alpha_s_dev.py
@@ -63,16 +68,16 @@ MODULE param
 	! compute covariance matrix
 	!
 	
-	real (kind = dp), dimension(binmin:78,binmin:78) :: SigInvV
+	real (kind = dp), dimension(:,:), allocatable :: SigInvV
 	real (kind=dp), dimension(1:21,1:21) :: Test
 	
 	!
 	! define and read in experimental data trucovV, sbin, dsbin
 	!
 
-	real (kind = dp), dimension(0:78,0:78) :: truecovv
+	real (kind = dp), dimension(0:78,0:78) :: truecovv, fesrcovv
 	
-	real (kind = dp), dimension(0:78) :: sbin
+	real (kind = dp), dimension(0:78) :: sbin, spec
 
 	real (kind = dp), dimension(0:78) :: dsbin
 	
@@ -82,27 +87,43 @@ MODULE param
 	
 	CONTAINS !=========================================================
 	
-	SUBROUTINE init() ! initialize experimental data arrays and spline data
+	SUBROUTINE init(bin) ! initialize experimental data arrays and spline data
 		
-		integer :: n
+		integer :: n,l,bin
+		
+		binmin = bin
 	
 		open(55, file = 'data/truecovV')
 		do n = 0, 78
 			read(55,*) truecovv(n,0:78)
 		end do
 		close(55)
+		
+		truecovv = (0.9987d0)**2*truecovv
 	
 		open(55, file = 'data/sbin')
 		do n = 0, 78
 			read(55,*) sbin(n)
 		end do
 		close(55)	
+		
+		open(55, file = 'data/specV')
+		do n = 0, 78
+			read(55,*) spec(n)
+		end do
+		close(55)
+		
+		spec = 0.9987*spec
 	
 		open(55, file = 'data/dsbin')
 		do n = 0, 78
 			read(55,*) dsbin(n)
 		end do
 		close(55)
+
+		do n=0,78
+			fesrcovv(n,n) = dot_product(dsbin(0:n),matmul(truecovV(0:n,0:n),dsbin(0:n)))/(2._dp*pi**2)**2
+		end do
 		
 		open(55, file='data/spline_tics.dat')
 		open(56, file='data/spline.dat')
@@ -118,6 +139,8 @@ MODULE param
 		close(55)
 		close(56)
 		
+		allocate(SigInvV(binmin:78,binmin:78), stat=statearr)
+		
 		SigInvV(binmin:78,binmin:78) = INVM()
 		!Test=T()
 		
@@ -129,10 +152,14 @@ MODULE param
 	!	COMPUTES THE INVERSE COVARIANT MATRIX // noch nicht getestet, invertieralgorithmus finden.
 	!
 		integer :: i,j
-		real (kind=dp), dimension(binmin:78,binmin:78) :: M, INVM
-		real (kind=dp), dimension(1:78-binmin+1,1:78-binmin+1) :: A,B
+		real (kind=dp), dimension(:,:), allocatable :: M, INVM
+		real (kind=dp), dimension(:,:), allocatable :: A,B
 		integer :: INDX(78-binmin+1),D,CODE
 		
+		allocate(A(1:78-binmin+1,1:78-binmin+1),stat=statearr)
+		allocate(B(1:78-binmin+1,1:78-binmin+1),stat=statearr)
+		allocate(M(binmin:78,binmin:78),stat=statearr)
+		allocate(INVM(binmin:78,binmin:78),stat=statearr)
 
 		do i = binmin, 78
 			B(i+1-binmin,i+1-binmin) = 1._dp
