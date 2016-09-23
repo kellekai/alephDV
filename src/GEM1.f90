@@ -537,14 +537,18 @@ PROGRAM main
 				end if
 				length = length + 1
 			end do
+			if (len(trim(buffer)) .eq. 0) length = 0
+			if (length .gt. 0) then
 
-			if (length .ge. 0) then
 				if (iscmt .eq. 1) then
 					line = trim(buffer(1:length))
 				else
-					line = trim(buffer)
+					line = adjustl(buffer)
+
 				endif
+
 				length = len(line)
+
 				do m=1,length
 					p = line(m:m)
 					if (p .eq. '=') then

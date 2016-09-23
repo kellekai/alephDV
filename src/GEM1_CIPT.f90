@@ -631,38 +631,42 @@ PROGRAM main
 
 			open(553, file="GEM1_CIPT.in")
 
-			do
-				read(553,'(A)',iostat=io) buffer
-				if (io .ne. 0) exit
-				do n=1,200
-					p=buffer(n:n)
-					if (p .eq. '#') then
-						iscmt = 1
+		do
+			read(553,'(A)',iostat=io) buffer
+			if (io .ne. 0) exit
+			do n=1,200
+				p=buffer(n:n)
+				if (p .eq. '#') then
+					iscmt = 1
+					exit
+				end if
+				length = length + 1
+			end do
+			if (len(trim(buffer)) .eq. 0) length = 0
+			if (length .gt. 0) then
+
+				if (iscmt .eq. 1) then
+					line = trim(buffer(1:length))
+				else
+					line = adjustl(buffer)
+
+				endif
+
+				length = len(line)
+
+				do m=1,length
+					p = line(m:m)
+					if (p .eq. '=') then
+						i = i+1
+						read(line(m+1:length),*) par(i)
 						exit
 					end if
-					length = length + 1
 				end do
-
-				if (length .ge. 0) then
-					if (iscmt .eq. 1) then
-						line = trim(buffer(1:length))
-					else
-						line = trim(buffer)
-					endif
-					length = len(line)
-					do m=1,length
-						p = line(m:m)
-						if (p .eq. '=') then
-							i = i+1
-							read(line(m+1:length),*) par(i)
-							exit
-						end if
-					end do
-				end if
-				if (i .eq. npar) exit
-				iscmt = 0
-				length=0
-			end do
+			end if
+			if (i .eq. npar) exit
+			iscmt = 0
+			length=0
+		end do
 
 			if (i .lt. npar) stop(" - [ERROR] - not enough parameter defined in config file")
 
