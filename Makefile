@@ -4,7 +4,7 @@
 
 FC = gfortran
 
-FCFLAGS = 
+FCFLAGS = -std=legacy 
 # -fcheck=all -Wall
 FLFLAGS = -L${LIBPATH} -lminuit -lquadpack -ltools
 
@@ -12,7 +12,8 @@ LIBPATH = ./lib/
 INCPATH = ./inc/
 SRCPATH = ./src/
 
-SRC = src/FM.f90 src/FM_CIPT.f90 src/EEM2.f90 src/EEM2_CIPT.f90
+SRC = src/FM.f90 src/FM_CIPT.f90 src/EEM1.f90 src/EEM1_CIPT.f90 \
+    src/GEM1.f90 src/GEM1_CIPT.f90 src/FEM.f90 src/FEM_CIPT.f90
 
 OBJ = ${addsuffix .run, ${basename ${notdir ${SRC}}}}
 
@@ -24,7 +25,13 @@ QPSRC = lib/quadpack/dqpsrt.f lib/quadpack/j4save.f lib/quadpack/d1mach.f \
     lib/quadpack/xersve.f lib/quadpack/dqag.f lib/quadpack/dqage.f \
     lib/quadpack/dqk21.f lib/quadpack/dqk31.f lib/quadpack/dqk31.f \
     lib/quadpack/dqk51.f lib/quadpack/dqk61.f lib/quadpack/dqk15.f \
-    lib/quadpack/dqk41.f 
+    lib/quadpack/dqk41.f lib/quadpack/dgetrf.f lib/quadpack/dgetri.f \
+    lib/quadpack/xerbla.f lib/quadpack/ilaenv.f lib/quadpack/dgetf2.f \
+    lib/quadpack/dlaswp.f lib/quadpack/dtrsm.f lib/quadpack/dgemm.f \
+    lib/quadpack/dtrtri.f lib/quadpack/dgemv.f lib/quadpack/dswap.f \
+    lib/quadpack/dlamch.f lib/quadpack/idamax.f lib/quadpack/dscal.f \
+    lib/quadpack/dger.f lib/quadpack/lsame.f lib/quadpack/dqk61.f \
+    lib/quadpack/dtrmm.f lib/quadpack/dtrti2.f lib/quadpack/dtrmv.f
 
 QPOBJ = ${QPSRC:.f=.o}
 
@@ -54,7 +61,7 @@ TLOBJ = complex.o cmplx_root2.o lu.o tipos.o param_dp.o \
 
 LIBOBJ = lib/libminuit.a lib/libquadpack.a lib/libtools.a 
 
-all: ${OBJ} clean
+all: ${OBJ} config clean
 
 FM.run: src/FM.f90 ${LIBOBJ}
 	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
@@ -62,10 +69,22 @@ FM.run: src/FM.f90 ${LIBOBJ}
 FM_CIPT.run: src/FM_CIPT.f90 ${LIBOBJ}
 	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
 	
-EEM2.run: src/EEM2.f90 ${LIBOBJ}
+EEM1.run: src/EEM1.f90 ${LIBOBJ}
 	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
 	
-EEM2_CIPT.run: src/EEM2_CIPT.f90 ${LIBOBJ}
+EEM1_CIPT.run: src/EEM1_CIPT.f90 ${LIBOBJ}
+	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
+	
+GEM1.run: src/GEM1.f90 ${LIBOBJ}
+	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
+	
+GEM1_CIPT.run: src/GEM1_CIPT.f90 ${LIBOBJ}
+	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
+	
+FEM.run: src/FEM.f90 ${LIBOBJ}
+	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
+	
+FEM_CIPT.run: src/FEM_CIPT.f90 ${LIBOBJ}
 	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
 	
 lib/libminuit.a: ${MNOBJ}
@@ -102,7 +121,7 @@ tipos.o: lib/tipos.f90
 	${FC} -c lib/tipos.f90
 
 cdflib.o: lib/cdflib.f90
-	${FC} -c lib/cdflib.f90
+	${FC} -c ${FCFLAGS} lib/cdflib.f90
 
 cmplx_root2.o: lib/cmplx_root2.f90
 	${FC} -c $<
@@ -115,5 +134,8 @@ clean:
 	rm lib/quadpack/*.o
 	rm lib/minuit/*.o
 
+config:
+	cp inc/*.in ./
+	
 remove: 
-	rm ${LIBOBJ} ${OBJ}
+	rm ${LIBOBJ} ${OBJ} *.in

@@ -28,13 +28,12 @@
 #						#
 #################################################
 
-alpha = 3.48
-beta = 0.63
-gamma = -2.4
-delta = 4.17
-gamma1 = 1.0
-delta1 = 1.0
+alpha = -1.2
+beta = 3.7
+delta = 0.91
+gamma = 1.63
+alpha' = -3.4
 
-atau = 0.3
+atau = 0.328
 
 binmin = 58
