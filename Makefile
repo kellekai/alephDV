@@ -4,7 +4,7 @@
 
 FC = gfortran
 
-FCFLAGS = 
+FCFLAGS = -std=legacy 
 # -fcheck=all -Wall
 FLFLAGS = -L${LIBPATH} -lminuit -lquadpack -ltools
 
@@ -12,12 +12,26 @@ LIBPATH = ./lib/
 INCPATH = ./inc/
 SRCPATH = ./src/
 
+SRC = src/FM.f90 src/FM_CIPT.f90 src/EEM1.f90 src/EEM1_CIPT.f90 \
+    src/GEM1.f90 src/GEM1_CIPT.f90 src/FEM.f90 src/FEM_CIPT.f90
+
+OBJ = ${addsuffix .run, ${basename ${notdir ${SRC}}}}
+
 QPSRC = lib/quadpack/dqpsrt.f lib/quadpack/j4save.f lib/quadpack/d1mach.f \
     lib/quadpack/xerhlt.f lib/quadpack/xerprn.f lib/quadpack/fdump.f \
     lib/quadpack/dqagi.f lib/quadpack/xermsg.f lib/quadpack/i1mach.f \
     lib/quadpack/xgetua.f lib/quadpack/dqelg.f lib/quadpack/dqagie.f \
     lib/quadpack/xercnt.f lib/quadpack/dqk15i.f lib/quadpack/gint.f \
-    lib/quadpack/xersve.f
+    lib/quadpack/xersve.f lib/quadpack/dqag.f lib/quadpack/dqage.f \
+    lib/quadpack/dqk21.f lib/quadpack/dqk31.f lib/quadpack/dqk31.f \
+    lib/quadpack/dqk51.f lib/quadpack/dqk61.f lib/quadpack/dqk15.f \
+    lib/quadpack/dqk41.f lib/quadpack/dgetrf.f lib/quadpack/dgetri.f \
+    lib/quadpack/xerbla.f lib/quadpack/ilaenv.f lib/quadpack/dgetf2.f \
+    lib/quadpack/dlaswp.f lib/quadpack/dtrsm.f lib/quadpack/dgemm.f \
+    lib/quadpack/dtrtri.f lib/quadpack/dgemv.f lib/quadpack/dswap.f \
+    lib/quadpack/dlamch.f lib/quadpack/idamax.f lib/quadpack/dscal.f \
+    lib/quadpack/dger.f lib/quadpack/lsame.f lib/quadpack/dqk61.f \
+    lib/quadpack/dtrmm.f lib/quadpack/dtrti2.f lib/quadpack/dtrmv.f
 
 QPOBJ = ${QPSRC:.f=.o}
 
@@ -42,15 +56,36 @@ MNSRC = lib/minuit/mnrset.F lib/minuit/intract.F lib/minuit/mnparm.F \
 
 MNOBJ = ${MNSRC:.F=.o}
 
-TLOBJ = ${TLSRC:.f90=.o}
+TLOBJ = complex.o cmplx_root2.o lu.o tipos.o param_dp.o \
+    numint.o polint.o cdflib.o
 
 LIBOBJ = lib/libminuit.a lib/libquadpack.a lib/libtools.a 
 
-all: alphaDV clean
+all: ${OBJ} config clean
 
-alphaDV: src/alphadv_dp.f90 ${LIBOBJ}
-	${FC} -o alphaDV src/alphadv_dp.f90 ${FCFLAGS} ${FLFLAGS} 
-	@echo -e "\n***Executive file alevDV produced***\n"
+FM.run: src/FM.f90 ${LIBOBJ}
+	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
+	
+FM_CIPT.run: src/FM_CIPT.f90 ${LIBOBJ}
+	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
+	
+EEM1.run: src/EEM1.f90 ${LIBOBJ}
+	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
+	
+EEM1_CIPT.run: src/EEM1_CIPT.f90 ${LIBOBJ}
+	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
+	
+GEM1.run: src/GEM1.f90 ${LIBOBJ}
+	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
+	
+GEM1_CIPT.run: src/GEM1_CIPT.f90 ${LIBOBJ}
+	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
+	
+FEM.run: src/FEM.f90 ${LIBOBJ}
+	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
+	
+FEM_CIPT.run: src/FEM_CIPT.f90 ${LIBOBJ}
+	  ${FC} -o $@ $< ${FCFLAGS} ${FLFLAGS}
 	
 lib/libminuit.a: ${MNOBJ}
 	rm -f $@
@@ -62,7 +97,7 @@ lib/libquadpack.a: ${QPOBJ}
 	ar rcs $@ $^
 	@echo -e "\n***Created Quadpack library***\n"
 
-lib/libtools.a: lu.o tipos.o param_dp.o numint.o polint.o
+lib/libtools.a: ${TLOBJ}
 	rm -f $@
 	ar rcs $@ $^
 	@echo -e "\n***Created Tools library***\n"
@@ -85,10 +120,22 @@ lu.o: lib/lu.f90
 tipos.o: lib/tipos.f90
 	${FC} -c lib/tipos.f90
 
+cdflib.o: lib/cdflib.f90
+	${FC} -c ${FCFLAGS} lib/cdflib.f90
+
+cmplx_root2.o: lib/cmplx_root2.f90
+	${FC} -c $<
+
+complex.o: lib/complex.f90 tipos.o param_dp.o
+	${FC} -c $<
+
 clean: 
 	rm *.mod *.o
 	rm lib/quadpack/*.o
 	rm lib/minuit/*.o
 
+config:
+	cp inc/*.in ./
+	
 remove: 
-	rm ${LIBOBJ} alphaDV
+	rm ${LIBOBJ} ${OBJ} *.in
